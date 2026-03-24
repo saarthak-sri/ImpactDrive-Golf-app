@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ImpactDrive - Golf Charity Subscription Platform ⛳️
 
-## Getting Started
+ImpactDrive is a next-generation subscription platform bridging the gap between the game of golf, high-stakes monthly prize draws, and global charitable impact. 
 
-First, run the development server:
+By combining automated algorithmic mathematics, secure Stripe subscriptions, and a modern Framer Motion-powered interface, members log their everyday Stableford golf rounds to earn unique entry numbers. Every month, the system proportionally calculates active subscriptions, designates a massive multi-tier prize pool, guarantees at least 10% direct donation to user-selected charities, and securely matches users' aggregated scores against the official draw numbers. 
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🛠 Tech Stack
+- **Frontend Core:** Next.js 16 (App Router), React, TypeScript
+- **Styling & UX:** Tailwind CSS, Framer Motion, Lucide React Icons
+- **Database & Auth:** Supabase (PostgreSQL, Row Level Security, SSR Middleware), Google OAuth Integration
+- **Billing & Subscriptions:** Stripe Checkout Sessions & Webhooks
+
+## 🚀 Key Features
+- **Algorithmic Draw Engine:** Dynamically calculates Tiers (3, 4, 5 matches) and physically rolls over Jackpots mathematically based on the active user subscription density.
+- **Score Parsing Constraints:** Users can infinitely submit scores, but a Rolling-5 constraint permanently drops the oldest score, maintaining a hyper-efficient strict subset of 5 numbers per user on the backend.
+- **Charitable Redirection:** Custom built directory interface empowering users to dynamically scale up their individual monthly charity contribution percentage safely above the 10% floor constraint.
+- **Robust Admin Suite:** SSR middleware-gated dashboard enabling administrators to simulate live draws, manage charity endpoints, and approve proof-of-winnings via image uploads completely securely (bypassing normal RLS).
+
+---
+
+## 💻 Local Development Instructions
+
+### 1. Prerequisites
+To run the platform locally, you must have Node.js installed, as well as an active Supabase and Stripe project.
+
+### 2. Environment Setup
+Configure your `.env.local` file with the following required backbone keys:
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
+# Critical: Use the Service Role Key safely generated from the Supabase API settings for Admin DB overrides.
+SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
+
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=your_stripe_key
+STRIPE_SECRET_KEY=your_stripe_secret
+STRIPE_WEBHOOK_SECRET=your_webhook_secret
+
+NEXT_PUBLIC_APP_URL=http://localhost:3000
 ```
+> **OAuth Note:** Google Authentication is fully integrated natively. To enable "Continue with Google", add your Supabase Callback URI (`https://<project-id>.supabase.co/auth/v1/callback`) to your Google Cloud Console Web App OAuth settings, and subsequently paste the generated Client ID & Secret into your Supabase Dashboard's Provider menu.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 3. Database Initialization
+Simply copy the entirety of `supabase/schema.sql` and run it in your Supabase SQL Editor. This will instantly build the unified schema hierarchy, complex user-sync triggers, and standard Row Level Security (RLS) policies.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 4. Booting the Server
+```bash
+npm install
+npm run dev
+```
+Navigate directly to `http://localhost:3000` to interact with the platform UI!
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🧪 Demo Credentials
 
-To learn more about Next.js, take a look at the following resources:
+If you are evaluating or examining this build, you can use the pre-configured mock accounts below to rapidly bypass setup and explore advanced feature states:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 1. The Administrator View
+To test Draw Algorithmic Simulations, view all global users simultaneously, manage the active Charity directory, and approve pending winner proof-images:
+- **Email:** `admin1@gmail.com`
+- **Password:** `admin123`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+*(Note: Once logged in, use the `Account` button or navigate manually to `http://localhost:3000/admin` to access the protected layout).*
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 2. Winnings / Dashboard State
+To view a standard user dashboard populated with successfully logged Rolling-5 scores, an active subscription state, and active algorithmic winnings populated on the Draw Results screen:
+- **Email:** `saltandwater21@gmail.com`
+- **Password:** `flayed`
