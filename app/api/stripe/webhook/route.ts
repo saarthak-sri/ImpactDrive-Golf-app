@@ -29,7 +29,7 @@ export async function POST(req: Request) {
   switch (event.type) {
     case 'customer.subscription.created':
     case 'customer.subscription.updated':
-      const subscription = await stripe.subscriptions.retrieve(session.id)
+      const subscription = await stripe.subscriptions.retrieve(session.id) as any
       const customerId = typeof subscription.customer === 'string' ? subscription.customer : subscription.customer.id
       
       // Find user by stripe_customer_id
@@ -40,12 +40,15 @@ export async function POST(req: Request) {
         .single()
         
       if (userData) {
+        const periodEnd = (subscription as any).current_period_end
+        const price = (subscription as any).items.data[0].price
+        
         await supabaseAdmin.from('subscriptions').upsert({
           user_id: userData.id,
           stripe_subscription_id: subscription.id,
-          plan_type: subscription.items.data[0].price.recurring?.interval === 'year' ? 'yearly' : 'monthly',
+          plan_type: price.recurring?.interval === 'year' ? 'yearly' : 'monthly',
           status: subscription.status,
-          current_period_end: new Date(subscription.current_period_end * 1000).toISOString(),
+          current_period_end: new Date(periodEnd * 1000).toISOString(),
         }, { onConflict: 'stripe_subscription_id' })
       }
       break
