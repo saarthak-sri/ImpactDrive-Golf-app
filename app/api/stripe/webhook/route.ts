@@ -4,6 +4,8 @@ import { createServerClient } from '@supabase/ssr'
 import { headers } from 'next/headers'
 import Stripe from 'stripe'
 
+export const dynamic = 'force-dynamic'
+
 export async function POST(req: Request) {
   const body = await req.text()
   const sig = (await headers()).get('Stripe-Signature') as string

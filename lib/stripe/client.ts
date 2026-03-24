@@ -1,6 +1,8 @@
 import Stripe from 'stripe'
 
-export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
+const stripeKey = process.env.STRIPE_SECRET_KEY || 'sk_test_building_dummy_key'
+
+export const stripe = new Stripe(stripeKey, {
   apiVersion: '2026-02-25.clover', // Latest stable API version or specific
   appInfo: {
     name: 'ImpactDrive',
