@@ -47,7 +47,12 @@ Simply copy the entirety of `supabase/schema.sql` and run it in your Supabase SQ
 npm install
 npm run dev
 ```
-Navigate directly to `http://localhost:3000` to interact with the platform UI!
+### 5. Troubleshooting OAuth Redirects
+If you are redirected to `localhost:3000` after a Google Login on Vercel:
+1. Go to your **Supabase Dashboard** -> **Authentication** -> **URL Configuration**.
+2. Set your **Site URL** to your Vercel production URL (e.g., `https://impactdrive.vercel.app`).
+3. Add `https://impactdrive.vercel.app/**` to the **Redirect URIs** list.
+4. Save the changes. Supabase will now correctly resolve the `/auth/callback` on your production domain.
 
 ---
 
