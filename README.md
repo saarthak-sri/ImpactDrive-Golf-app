@@ -1,5 +1,7 @@
 # ImpactDrive - Golf Charity Subscription Platform ⛳️
 
+**Live Site:** [https://impact-drive-golf-app.vercel.app/](https://impact-drive-golf-app.vercel.app/)
+
 ImpactDrive is a next-generation subscription platform bridging the gap between the game of golf, high-stakes monthly prize draws, and global charitable impact. 
 
 By combining automated algorithmic mathematics, secure Stripe subscriptions, and a modern Framer Motion-powered interface, members log their everyday Stableford golf rounds to earn unique entry numbers. Every month, the system proportionally calculates active subscriptions, designates a massive multi-tier prize pool, guarantees at least 10% direct donation to user-selected charities, and securely matches users' aggregated scores against the official draw numbers. 
