@@ -17,8 +17,25 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <body className={cn(inter.className, "bg-slate-950 text-slate-50 min-h-screen antialiased selection:bg-emerald-500/30")}>
-        {children}
+      <body className={cn(inter.className, "bg-slate-950 text-slate-50 min-h-screen antialiased flex flex-col selection:bg-emerald-500/30")}>
+        <div className="flex-grow">
+          {children}
+        </div>
+        <footer className="py-12 border-t border-slate-900 bg-slate-950/50 backdrop-blur-sm">
+          <div className="max-w-7xl mx-auto px-6 text-center space-y-2">
+            <p className="text-slate-500 text-sm font-medium">
+              Made with ❤️ by <span className="text-slate-300">Saarthak Srivastav</span>
+            </p>
+            <a 
+              href="https://github.com/saarthak-sri" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-block text-emerald-500/70 hover:text-emerald-400 text-xs transition-all hover:underline"
+            >
+              Github: https://github.com/saarthak-sri
+            </a>
+          </div>
+        </footer>
       </body>
     </html>
   )
