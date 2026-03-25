@@ -40,7 +40,7 @@ NEXT_PUBLIC_APP_URL=http://localhost:3000
 > **OAuth Note:** Google Authentication is fully integrated natively. To enable "Continue with Google", add your Supabase Callback URI (`https://<project-id>.supabase.co/auth/v1/callback`) to your Google Cloud Console Web App OAuth settings, and subsequently paste the generated Client ID & Secret into your Supabase Dashboard's Provider menu.
 
 ### 3. Database Initialization
-Simply copy the entirety of `supabase/schema.sql` and run it in your Supabase SQL Editor. This will instantly build the unified schema hierarchy, complex user-sync triggers, and standard Row Level Security (RLS) policies.
+Simply copy the entirety of `supabase/schema.sql` and run it in your Supabase SQL Editor. This will instantly build the unified schema hierarchy, complex user-sync triggers, and standard Row Level Security (RLS) policies
 
 ### 4. Booting the Server
 ```bash
